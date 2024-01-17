@@ -9,6 +9,10 @@ android {
     namespace 'com.madhavth.gardeningjournalapp'
     compileSdk 34
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "com.madhavth.gardeningjournalapp"
         minSdk 24

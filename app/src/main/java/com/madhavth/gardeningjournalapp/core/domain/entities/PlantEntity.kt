@@ -1,10 +1,14 @@
 package com.madhavth.gardeningjournalapp.core.domain.entities
 
-import java.util.Date
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-data class PlantEntity(
+@Entity(tableName = "plants")
+data class Plant(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
     val name: String,
     val type: String,
     val wateringFrequency: Int,
-    val plantingDate: Date
+    val plantingDate: String
 )
