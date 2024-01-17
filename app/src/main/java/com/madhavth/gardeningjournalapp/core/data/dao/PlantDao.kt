@@ -15,14 +15,14 @@ interface PlantDao {
     @Insert
     suspend fun insert(plant: Plant)
 
-    @Update
-    suspend fun update(plant: Plant)
-
     @Query("DELETE FROM plants")
-    suspend fun deleteAll()
+    suspend fun deleteAll(): Int
+
+    @Update
+    suspend fun update(plant: Plant): Int
 
     @Query("DELETE FROM plants WHERE id = :plantId")
-    suspend fun delete(plantId: Int)
+    suspend fun delete(plantId: Int): Int
 
     @Query("SELECT * FROM plants WHERE id = :plantId")
     fun getPlantById(plantId: Int): LiveData<Plant>
