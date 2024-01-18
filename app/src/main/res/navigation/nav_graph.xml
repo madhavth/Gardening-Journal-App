@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/blankFragment">
+
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.madhavth.gardeningjournalapp.HomeFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_blankFragment_to_plantDetailsFragment"
+            app:destination="@id/plantDetailsFragment" />
+        <action
+            android:id="@+id/action_blankFragment_to_gardenLogFragment"
+            app:destination="@id/gardenLogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plantDetailsFragment"
+        android:name="com.madhavth.gardeningjournalapp.PlantDetailsFragment"
+        android:label="fragment_plant_details"
+        tools:layout="@layout/fragment_plant_details" />
+    <fragment
+        android:id="@+id/gardenLogFragment"
+        android:name="com.madhavth.gardeningjournalapp.GardenLogFragment"
+        android:label="fragment_garden_log"
+        tools:layout="@layout/fragment_garden_log" />
+</navigation>
