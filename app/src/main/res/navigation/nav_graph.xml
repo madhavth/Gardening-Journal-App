@@ -27,6 +27,10 @@
         android:name="com.madhavth.gardeningjournalapp.PlantDetailsFragment"
         android:label="fragment_plant_details"
         tools:layout="@layout/fragment_plant_details" >
+        <argument
+            android:name="plant"
+            app:argType="com.madhavth.gardeningjournalapp.core.domain.entities.Plant" />
+
     </fragment>
     <fragment
         android:id="@+id/gardenLogFragment"
