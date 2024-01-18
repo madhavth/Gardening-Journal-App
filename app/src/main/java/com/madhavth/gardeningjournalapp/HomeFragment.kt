@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import com.madhavth.gardeningjournalapp.core.domain.entities.Plant
+import com.madhavth.gardeningjournalapp.databinding.FragmentHomeBinding
 import com.madhavth.gardeningjournalapp.features.home.presentation.view_models.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,6 +18,8 @@ class HomeFragment : Fragment() {
 
     private val homeViewModel by hiltNavGraphViewModels<HomeViewModel>(R.navigation.nav_graph)
 
+    private lateinit var binding: FragmentHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -24,10 +27,28 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater, container,false)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        bindViews()
+        bindObservers()
+    }
+
+    private fun bindObservers() {
+        homeViewModel.allPlants.observe(viewLifecycleOwner) {
+
+        }
+    }
+
+    private fun bindViews() {
+        binding.btnLogPlant.setOnClickListener { navigateToGardenLogFragment() }
+    }
+
     fun navigateToPlantDetailsFragment(plant: Plant) {
         val action = HomeFragmentDirections.actionHomeFragmentToPlantDetailsFragment(plant)
         findNavController().navigate(action)

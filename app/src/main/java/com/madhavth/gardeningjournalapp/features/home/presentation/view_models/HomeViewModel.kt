@@ -11,7 +11,5 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val plantRepository: PlantRepository
 ) : ViewModel() {
-    suspend fun getAllPlants(): LiveData<List<Plant>> {
-        return plantRepository.allPlants
-    }
+    val allPlants = plantRepository.allPlants
 }

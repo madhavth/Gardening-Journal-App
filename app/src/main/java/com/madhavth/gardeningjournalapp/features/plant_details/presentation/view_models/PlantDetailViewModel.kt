@@ -2,6 +2,7 @@ package com.madhavth.gardeningjournalapp.features.plant_details.presentation.vie
 
 import android.service.quicksettings.Tile
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.madhavth.gardeningjournalapp.core.data.repositories.PlantRepository
@@ -17,6 +18,10 @@ import javax.inject.Inject
 class PlantDetailViewModel @Inject constructor(
     private val plantRepository: PlantRepository
 ) : ViewModel() {
+
+    private var _plant: MutableLiveData<Plant?> = MutableLiveData<Plant?>(null)
+    val plant: LiveData<Plant?> = _plant
+
      fun getPlantById(plantId: Int): LiveData<Plant> {
         return plantRepository.getPlantById(plantId)
     }
@@ -26,4 +31,8 @@ class PlantDetailViewModel @Inject constructor(
     suspend fun removePlant(plant: Plant) {
         plantRepository.delete(plant)
     }
+    fun setPlant(plant: Plant) {
+        _plant.value = plant
+    }
+
 }

@@ -33,7 +33,20 @@ class PlantDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val plants = args.plant.id
+        val plant = args.plant
+        plantDetailViewModel.setPlant(plant)
+        bindViews()
+        bindObservers()
+    }
+
+    private fun bindViews() {
+
+    }
+    private fun bindObservers() {
+        plantDetailViewModel.plant.observe(viewLifecycleOwner) {
+         plant ->
+            if(plant == null) return@observe
+        }
     }
 
     companion object {
