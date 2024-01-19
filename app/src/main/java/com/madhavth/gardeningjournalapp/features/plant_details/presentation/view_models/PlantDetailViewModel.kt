@@ -29,6 +29,11 @@ class PlantDetailViewModel @Inject constructor(
     suspend fun updatePlant(plant: Plant) {
         plantRepository.update(plant)
     }
+
+    suspend fun deletePlant(plant: Plant) {
+        plantRepository.delete(plant)
+    }
+
     fun setPlant(plant: Plant) {
         _plant.value = plant
     }
