@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.madhavth.gardeningjournalapp.core.data.repositories.PlantRepository
 import com.madhavth.gardeningjournalapp.core.domain.entities.Plant
 import dagger.assisted.Assisted
@@ -22,14 +23,11 @@ class PlantDetailViewModel @Inject constructor(
     private var _plant: MutableLiveData<Plant?> = MutableLiveData<Plant?>(null)
     val plant: LiveData<Plant?> = _plant
 
-     fun getPlantById(plantId: Int): LiveData<Plant> {
+    fun getPlantById(plantId: Int): LiveData<Plant> {
         return plantRepository.getPlantById(plantId)
     }
     suspend fun updatePlant(plant: Plant) {
         plantRepository.update(plant)
-    }
-    suspend fun removePlant(plant: Plant) {
-        plantRepository.delete(plant)
     }
     fun setPlant(plant: Plant) {
         _plant.value = plant
