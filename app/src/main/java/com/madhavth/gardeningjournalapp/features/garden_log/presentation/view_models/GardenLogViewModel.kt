@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.madhavth.gardeningjournalapp.core.data.repositories.PlantRepository
 import com.madhavth.gardeningjournalapp.core.domain.entities.Plant
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -12,7 +14,9 @@ class GardenLogViewModel @Inject constructor(
     private val plantRepository: PlantRepository
 ) : ViewModel() {
     suspend fun addPlant(plant: Plant) {
-        plantRepository.insert(plant)
+        withContext(Dispatchers.IO) {
+            plantRepository.insert(plant)
+        }
     }
 
     suspend fun updatePlant(plant: Plant) {
