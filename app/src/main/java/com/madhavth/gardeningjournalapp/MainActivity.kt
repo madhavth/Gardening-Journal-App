@@ -11,18 +11,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var plantDao: PlantDao
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        lifecycleScope.launch {
-            plantDao.getAllPlants().observe(this@MainActivity) {
-                Timber.d("All plants: $it")
-            }
-        }
     }
 }
