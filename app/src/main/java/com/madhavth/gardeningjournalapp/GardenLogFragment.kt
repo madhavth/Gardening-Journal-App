@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import com.madhavth.gardeningjournalapp.databinding.FragmentGardenLogBinding
 import com.madhavth.gardeningjournalapp.features.garden_log.presentation.view_models.GardenLogViewModel
 
 class GardenLogFragment : Fragment() {
 
     private val gardenLogViewModel by hiltNavGraphViewModels<GardenLogViewModel>(R.navigation.nav_graph)
+    private lateinit var binding: FragmentGardenLogBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +23,10 @@ class GardenLogFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_garden_log, container, false)
+        binding = FragmentGardenLogBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     companion object {
