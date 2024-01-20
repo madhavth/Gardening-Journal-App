@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:padding="12dp"
     tools:context=".GardenLogFragment">
 
@@ -12,7 +13,6 @@
         android:id="@+id/et_plant_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:hint="Enter Plant Name"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:inputType="number"
         android:hint="Enter Plant Watering Frequency"
         app:layout_constraintTop_toBottomOf="@id/et_plant_type" />
 

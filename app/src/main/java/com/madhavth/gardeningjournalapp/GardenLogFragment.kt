@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.madhavth.gardeningjournalapp.core.domain.entities.PlantData
 import com.madhavth.gardeningjournalapp.databinding.FragmentGardenLogBinding
@@ -78,6 +79,7 @@ class GardenLogFragment : Fragment() {
         if (gardenLogViewModel.validatePlantData()) {
             gardenLogViewModel.savePlant()
             Snackbar.make(binding.root, "Plant added successfully", Snackbar.LENGTH_SHORT).show()
+            findNavController().popBackStack()
         } else {
             Snackbar.make(binding.root, "Please fill all the fields", Snackbar.LENGTH_SHORT).show()
         }
