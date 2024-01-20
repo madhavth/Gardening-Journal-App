@@ -3,6 +3,7 @@ package com.madhavth.gardeningjournalapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
+import com.madhavth.gardeningjournalapp.core.data.AppPreference
 import com.madhavth.gardeningjournalapp.core.data.dao.PlantDao
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

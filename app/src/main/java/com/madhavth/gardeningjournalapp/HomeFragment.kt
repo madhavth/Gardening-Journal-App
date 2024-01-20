@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.madhavth.gardeningjournalapp.core.data.AppPreference
 import com.madhavth.gardeningjournalapp.core.domain.entities.Plant
 import com.madhavth.gardeningjournalapp.databinding.FragmentHomeBinding
 import com.madhavth.gardeningjournalapp.features.home.data.PlantsAdapter
 import com.madhavth.gardeningjournalapp.features.home.presentation.view_models.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -36,6 +39,20 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bindViews()
         bindObservers()
+        // add dummy data for now
+        checkIfFirstLaunch()
+    }
+
+    private fun checkIfFirstLaunch() {
+        val appPreference = AppPreference(context?: return)
+        if(appPreference.isFirstLaunch) {
+            lifecycleScope.launch {
+                Timber.d("First launch")
+                // load dummy data
+                homeViewModel.addDummyData()
+                appPreference.isFirstLaunch = false
+            }
+        }
     }
 
     private fun bindObservers() {
