@@ -16,6 +16,8 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class PlantDetailViewModel(
@@ -27,8 +29,8 @@ class PlantDetailViewModel(
         .plantDao()
     )
 
-    private var _plant: MutableLiveData<Plant?> = MutableLiveData<Plant?>(null)
-    val plant: LiveData<Plant?> = _plant
+    private var _plant: MutableStateFlow<Plant?> = MutableStateFlow<Plant?>(null)
+    val plant: StateFlow<Plant?> = _plant
 
     fun getPlantById(plantId: Int): LiveData<Plant> {
         return plantRepository.getPlantById(plantId)

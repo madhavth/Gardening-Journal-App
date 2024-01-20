@@ -30,6 +30,9 @@
         <argument
             android:name="plant"
             app:argType="com.madhavth.gardeningjournalapp.core.domain.entities.Plant" />
+        <action
+            android:id="@+id/action_plantDetailsFragment_to_gardenLogFragment"
+            app:destination="@id/gardenLogFragment" />
 
     </fragment>
     <fragment

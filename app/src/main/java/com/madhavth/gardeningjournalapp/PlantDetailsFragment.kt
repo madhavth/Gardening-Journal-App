@@ -5,12 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.madhavth.gardeningjournalapp.core.domain.entities.Plant
 import com.madhavth.gardeningjournalapp.databinding.FragmentPlantDetailsBinding
+import com.madhavth.gardeningjournalapp.features.plant_details.presentation.page.PlantDetailsScreen
 import com.madhavth.gardeningjournalapp.features.plant_details.presentation.view_models.PlantDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,33 +40,36 @@ class PlantDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val plant = args.plant
         plantDetailViewModel.setPlant(plant)
+        binding.btnLogPlant.setOnClickListener {
+            findNavController().navigate(R.id.action_plantDetailsFragment_to_gardenLogFragment)
+        }
+        binding.composeView.apply {
+            setViewCompositionStrategy(
+                ViewCompositionStrategy.DisposeOnLifecycleDestroyed(viewLifecycleOwner)
+            )
+            setContent {
+                MaterialTheme {
+                    val myPlant = plantDetailViewModel.plant.collectAsState()
+                    PlantDetailsScreen(myPlant.value)
+                }
+            }
+        }
         setPlantView(plant)
-        bindObservers()
     }
 
     private fun setPlantView(plant: Plant) {
-        binding.apply {
-            tvPlantName.text = plant.name
-            tvPlantType.text = plant.type
-            tvPlantingDate.text = plant.plantingDate
-            tvWateringFrequency.text = plant.wateringFrequency.toString()
-        }
+//        binding.apply {
+//            tvPlantName.text = plant.name
+//            tvPlantType.text = plant.type
+//            tvPlantingDate.text = plant.plantingDate
+//            tvWateringFrequency.text = plant.wateringFrequency.toString()
+//        }
     }
 
-    private fun bindObservers() {
-        plantDetailViewModel.plant.observe(viewLifecycleOwner) { plant ->
-            if (plant == null) {
-                findNavController().popBackStack()
-                return@observe
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            PlantDetailsFragment().apply {
             }
-            setPlantView(plant)
     }
-}
-
-companion object {
-    @JvmStatic
-    fun newInstance(param1: String, param2: String) =
-        PlantDetailsFragment().apply {
-        }
-}
 }
