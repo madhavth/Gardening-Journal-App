@@ -5,14 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.madhavth.gardeningjournalapp.core.domain.entities.Plant
 import com.madhavth.gardeningjournalapp.databinding.FragmentPlantDetailsBinding
 import com.madhavth.gardeningjournalapp.features.plant_details.presentation.view_models.PlantDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class PlantDetailsFragment : Fragment() {
@@ -36,12 +35,17 @@ class PlantDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val plant = args.plant
         plantDetailViewModel.setPlant(plant)
-        bindViews()
+        setPlantView(plant)
         bindObservers()
     }
 
-    private fun bindViews() {
-
+    private fun setPlantView(plant: Plant) {
+        binding.apply {
+            tvPlantName.text = plant.name
+            tvPlantType.text = plant.type
+            tvPlantingDate.text = plant.plantingDate
+            tvWateringFrequency.text = plant.wateringFrequency.toString()
+        }
     }
 
     private fun bindObservers() {
@@ -50,6 +54,7 @@ class PlantDetailsFragment : Fragment() {
                 findNavController().popBackStack()
                 return@observe
             }
+            setPlantView(plant)
     }
 }
 
