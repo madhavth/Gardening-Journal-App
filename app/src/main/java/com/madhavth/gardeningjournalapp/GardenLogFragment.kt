@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.madhavth.gardeningjournalapp.core.domain.entities.PlantData
 import com.madhavth.gardeningjournalapp.databinding.FragmentGardenLogBinding
 import com.madhavth.gardeningjournalapp.features.garden_log.presentation.view_models.GardenLogViewModel
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class GardenLogFragment : Fragment() {
 
-    private val gardenLogViewModel by hiltNavGraphViewModels<GardenLogViewModel>(R.navigation.nav_graph)
+    private val gardenLogViewModel by viewModels<GardenLogViewModel>()
     private lateinit var binding: FragmentGardenLogBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +77,9 @@ class GardenLogFragment : Fragment() {
     private suspend fun onSaveClicked() {
         if (gardenLogViewModel.validatePlantData()) {
             gardenLogViewModel.savePlant()
+            Snackbar.make(binding.root, "Plant added successfully", Snackbar.LENGTH_SHORT).show()
+        } else {
+            Snackbar.make(binding.root, "Please fill all the fields", Snackbar.LENGTH_SHORT).show()
         }
     }
 

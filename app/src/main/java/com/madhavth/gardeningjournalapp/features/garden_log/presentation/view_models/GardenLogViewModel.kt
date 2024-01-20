@@ -13,8 +13,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GardenLogViewModel @Inject constructor(
-    private val plantRepository: PlantRepository
 ) : ViewModel() {
+
+    @Inject
+    lateinit var plantRepository: PlantRepository
+
+
     private var plantData: PlantData = PlantData()
 
     private suspend fun addPlant(plant: Plant) {

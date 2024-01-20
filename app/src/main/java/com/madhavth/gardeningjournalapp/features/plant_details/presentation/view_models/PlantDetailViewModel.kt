@@ -17,8 +17,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlantDetailViewModel @Inject constructor(
-    private val plantRepository: PlantRepository
 ) : ViewModel() {
+    @Inject
+    lateinit var plantRepository: PlantRepository
+
 
     private var _plant: MutableLiveData<Plant?> = MutableLiveData<Plant?>(null)
     val plant: LiveData<Plant?> = _plant

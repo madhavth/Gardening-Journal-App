@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import com.madhavth.gardeningjournalapp.core.domain.entities.Plant
@@ -17,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    private val homeViewModel by hiltNavGraphViewModels<HomeViewModel>(R.navigation.nav_graph)
+    private val homeViewModel by viewModels<HomeViewModel>()
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var plantsAdapter: PlantsAdapter

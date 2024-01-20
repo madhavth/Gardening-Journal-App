@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val plantRepository: PlantRepository
+    val plantRepository: PlantRepository
 ) : ViewModel() {
     val allPlants = plantRepository.allPlants
 }

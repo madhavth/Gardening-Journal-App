@@ -5,5 +5,5 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.GardeningJournalApp" parent="Base.Theme.GardeningJournalApp" />
+    <style name="Theme.GardeningJournalApp" parent="Theme.Material3.Light.NoActionBar" />
 </resources>

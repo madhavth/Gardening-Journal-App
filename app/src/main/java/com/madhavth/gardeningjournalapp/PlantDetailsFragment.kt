@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -18,7 +19,7 @@ class PlantDetailsFragment : Fragment() {
 
     private val args: PlantDetailsFragmentArgs by navArgs()
 
-    private val plantDetailViewModel by hiltNavGraphViewModels<PlantDetailViewModel>(R.id.nav_graph_xml)
+    private val plantDetailViewModel by viewModels<PlantDetailViewModel>()
 
     private lateinit var binding: FragmentPlantDetailsBinding
 
