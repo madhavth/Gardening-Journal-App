@@ -1,23 +1,23 @@
 package com.madhavth.gardeningjournalapp.features.garden_log.presentation.view_models
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
+import com.madhavth.gardeningjournalapp.core.data.database.PlantDatabase
 import com.madhavth.gardeningjournalapp.core.data.repositories.PlantRepository
 import com.madhavth.gardeningjournalapp.core.domain.entities.Plant
 import com.madhavth.gardeningjournalapp.core.domain.entities.PlantData
 import com.madhavth.gardeningjournalapp.core.domain.entities.toEntity
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
-@HiltViewModel
-class GardenLogViewModel @Inject constructor(
-) : ViewModel() {
-
-    @Inject
-    lateinit var plantRepository: PlantRepository
-
+class GardenLogViewModel constructor(
+    application: Application
+) : AndroidViewModel(application) {
+    private val plantRepository: PlantRepository = PlantRepository(PlantDatabase
+        .getDatabase(application.applicationContext)
+        .plantDao()
+    )
 
     private var plantData: PlantData = PlantData()
 

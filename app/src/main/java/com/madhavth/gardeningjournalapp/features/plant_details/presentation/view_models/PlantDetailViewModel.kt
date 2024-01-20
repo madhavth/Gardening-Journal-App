@@ -1,11 +1,14 @@
 package com.madhavth.gardeningjournalapp.features.plant_details.presentation.view_models
 
+import android.app.Application
 import android.service.quicksettings.Tile
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.madhavth.gardeningjournalapp.core.data.database.PlantDatabase
 import com.madhavth.gardeningjournalapp.core.data.repositories.PlantRepository
 import com.madhavth.gardeningjournalapp.core.domain.entities.Plant
 import dagger.assisted.Assisted
@@ -15,12 +18,14 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@HiltViewModel
-class PlantDetailViewModel @Inject constructor(
-) : ViewModel() {
-    @Inject
-    lateinit var plantRepository: PlantRepository
-
+class PlantDetailViewModel(
+    application: Application
+) : AndroidViewModel(application) {
+    private val plantRepository: PlantRepository = PlantRepository(
+        PlantDatabase
+        .getDatabase(application.applicationContext)
+        .plantDao()
+    )
 
     private var _plant: MutableLiveData<Plant?> = MutableLiveData<Plant?>(null)
     val plant: LiveData<Plant?> = _plant
